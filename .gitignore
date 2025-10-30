@@ -1,4 +1,5 @@
 *.pdf
-*.txt
+PARTE_GENERAL.txt
+test.txt
 *.jsonl
 paginas_temp
