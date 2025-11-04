@@ -1,0 +1,20 @@
+{
+  "@odata.context": "https://analitica.search.windows.net/$metadata#datasources/$entity",
+  "@odata.etag": "\"0x8DE1730C1C25C70\"",
+  "name": "search-1761771282147-datasource",
+  "description": null,
+  "type": "azureblob",
+  "subtype": null,
+  "indexerPermissionOptions": [],
+  "credentials": {
+    "connectionString": "DefaultEndpointsProtocol=https;AccountName=proanalitica;AccountKey=..."
+  },
+  "container": {
+    "name": "v-ia",
+    "query": null
+  },
+  "dataChangeDetectionPolicy": null,
+  "dataDeletionDetectionPolicy": null,
+  "encryptionKey": null,
+  "identity": null
+}

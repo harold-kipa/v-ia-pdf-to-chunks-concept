@@ -1,0 +1,24 @@
+{
+  "@odata.context": "https://analitica.search.windows.net/$metadata#indexers/$entity",
+  "@odata.etag": "\"0x8DE17F9EBCDF4BF\"",
+  "name": "indexer-1761773404809",
+  "description": null,
+  "dataSourceName": "search-1761771282147-datasource",
+  "skillsetName": null,
+  "targetIndexName": "search-v2",
+  "disabled": null,
+  "schedule": null,
+  "parameters": {
+    "batchSize": null,
+    "maxFailedItems": null,
+    "maxFailedItemsPerBatch": null,
+    "configuration": {
+      "parsingMode": "jsonLines",
+      "dataToExtract": "contentAndMetadata"
+    }
+  },
+  "fieldMappings": [],
+  "outputFieldMappings": [],
+  "cache": null,
+  "encryptionKey": null
+}

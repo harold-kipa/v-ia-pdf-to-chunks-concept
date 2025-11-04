@@ -1,0 +1,125 @@
+{
+  "@odata.etag": "\"0x8DE173245EF6ED5\"",
+  "name": "search-v2",
+  "fields": [
+    {
+      "name": "id",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": true,
+      "facetable": true,
+      "key": true,
+      "synonymMaps": []
+    },
+    {
+      "name": "doc_id",
+      "type": "Edm.String",
+      "searchable": false,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false,
+      "synonymMaps": []
+    },
+    {
+      "name": "page",
+      "type": "Edm.Int32",
+      "searchable": false,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false,
+      "synonymMaps": []
+    },
+    {
+      "name": "chunk_idx",
+      "type": "Edm.Int32",
+      "searchable": false,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false,
+      "synonymMaps": []
+    },
+    {
+      "name": "title",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false,
+      "synonymMaps": []
+    },
+    {
+      "name": "keyPhrases",
+      "type": "Collection(Edm.String)",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": false,
+      "facetable": true,
+      "key": false,
+      "synonymMaps": []
+    },
+    {
+      "name": "content",
+      "type": "Edm.String",
+      "searchable": true,
+      "filterable": true,
+      "retrievable": true,
+      "stored": true,
+      "sortable": true,
+      "facetable": true,
+      "key": false,
+      "synonymMaps": []
+    }
+  ],
+  "scoringProfiles": [],
+  "suggesters": [],
+  "analyzers": [],
+  "normalizers": [],
+  "tokenizers": [],
+  "tokenFilters": [],
+  "charFilters": [],
+  "similarity": {
+    "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
+  },
+  "semantic": {
+    "defaultConfiguration": "default-semantic",
+    "configurations": [
+      {
+        "name": "default-semantic",
+        "flightingOptIn": false,
+        "rankingOrder": "BoostedRerankerScore",
+        "prioritizedFields": {
+          "prioritizedContentFields": [
+            {
+              "fieldName": "content"
+            },
+            {
+              "fieldName": "title"
+            }
+          ],
+          "prioritizedKeywordsFields": [
+            {
+              "fieldName": "keyPhrases"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}
