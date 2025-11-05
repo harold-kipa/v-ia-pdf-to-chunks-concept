@@ -4,3 +4,5 @@ test.txt
 *.jsonl
 paginas_temp
 venv
+.env
+*.log

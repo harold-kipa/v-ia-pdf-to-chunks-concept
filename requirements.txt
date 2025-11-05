@@ -1,2 +1,4 @@
 pytesseract
 pdf2image
+azure-storage-blob
+python-dotenv
