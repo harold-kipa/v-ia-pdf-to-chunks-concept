@@ -2,6 +2,7 @@
 PARTE_GENERAL.txt
 test.txt
 *.jsonl
+test.json
 paginas_temp
 venv
 .env

@@ -1,6 +1,6 @@
 {
-  "@odata.etag": "\"0x8DE173245EF6ED5\"",
-  "name": "search-v2",
+  "@odata.etag": "\"0x8DE207C2AF1052C\"",
+  "name": "search-v4",
   "fields": [
     {
       "name": "id",
@@ -85,9 +85,29 @@
       "facetable": true,
       "key": false,
       "synonymMaps": []
+    },
+    {
+      "name": "content_vector",
+      "type": "Collection(Edm.Single)",
+      "searchable": true,
+      "filterable": false,
+      "retrievable": false,
+      "stored": false,
+      "sortable": false,
+      "facetable": false,
+      "key": false,
+      "dimensions": 384,
+      "vectorSearchProfile": "vprofile",
+      "synonymMaps": []
     }
   ],
   "scoringProfiles": [],
+  "corsOptions": {
+    "allowedOrigins": [
+      "*"
+    ],
+    "maxAgeInSeconds": 300
+  },
   "suggesters": [],
   "analyzers": [],
   "normalizers": [],
@@ -97,29 +117,26 @@
   "similarity": {
     "@odata.type": "#Microsoft.Azure.Search.BM25Similarity"
   },
-  "semantic": {
-    "defaultConfiguration": "default-semantic",
-    "configurations": [
+  "vectorSearch": {
+    "algorithms": [
       {
-        "name": "default-semantic",
-        "flightingOptIn": false,
-        "rankingOrder": "BoostedRerankerScore",
-        "prioritizedFields": {
-          "prioritizedContentFields": [
-            {
-              "fieldName": "content"
-            },
-            {
-              "fieldName": "title"
-            }
-          ],
-          "prioritizedKeywordsFields": [
-            {
-              "fieldName": "keyPhrases"
-            }
-          ]
+        "name": "halg",
+        "kind": "hnsw",
+        "hnswParameters": {
+          "metric": "cosine",
+          "m": 4,
+          "efConstruction": 400,
+          "efSearch": 500
         }
       }
-    ]
+    ],
+    "profiles": [
+      {
+        "name": "vprofile",
+        "algorithm": "halg"
+      }
+    ],
+    "vectorizers": [],
+    "compressions": []
   }
 }
