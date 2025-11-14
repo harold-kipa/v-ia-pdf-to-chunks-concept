@@ -42,6 +42,6 @@ def main(in_path, out_path, batch_size=64):
 
 if __name__ == "__main__":
     # Uso: python embed_chunks.py chunks.jsonl chunks_with_vectors.jsonl
-    in_file  = sys.argv[1] if len(sys.argv) > 1 else "test_chunks.jsonl"
-    out_file = sys.argv[2] if len(sys.argv) > 2 else "test_chunks_with_vectors.jsonl"
+    in_file  = sys.argv[1] if len(sys.argv) > 1 else "PARTE_GENERAL.jsonl"
+    out_file = sys.argv[2] if len(sys.argv) > 2 else "PARTE_GENERAL_vectors.jsonl"
     main(in_file, out_file)

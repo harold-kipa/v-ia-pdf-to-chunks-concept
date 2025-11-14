@@ -5,13 +5,14 @@ from pathlib import Path
 from azure.storage.blob import BlobClient
 from dotenv import load_dotenv
 import json
+from db_conector import db_conection
 from log import get_logger
 
 OUT_PATH  = "./descargas/file.pdf" # ruta local de salida
 CONTAINER_PDF = "v-ia-files"
-CONTAINER_CHUNKS = "v-ia"
-CHUNK_SIZE = 300
-CHUNK_OVERLAP = 50
+CONTAINER_CHUNKS = "v-ia-chunks"
+CHUNK_SIZE = 7000
+CHUNK_OVERLAP = 600
 
 def createBlobClient(blobName, containerName):
     # Se carga .env si existe
@@ -25,18 +26,20 @@ def createBlobClient(blobName, containerName):
 
 def getPdfFromBlob(pdfName, outPath=OUT_PATH):
     # nombre del archivo pdf a descargar
-    blobName = f"contratos/{pdfName}.pdf"
+    blobName = f"{pdfName}.pdf"
 
     # Crear el cliente del blob
     blob = createBlobClient(blobName, CONTAINER_PDF)
 
+
     Path(outPath).parent.mkdir(parents=True, exist_ok=True)
+    print(blobName)
     with open(outPath, "wb") as f:
         f.write(blob.download_blob().readall())
 
 
 def chunk_text(text, size=CHUNK_SIZE, overlap=CHUNK_OVERLAP):
-    text = text.strip()
+    text =   text.strip()
     print(f"Texto total a chunkear: {len(text)} caracteres.")
     if not text:
         return []
@@ -81,7 +84,8 @@ def extract_text_with_pdftotext(pdf_path):
         return ""
 
 def ocr_pdf_to_chunks(pdfPath, pdfName, lang="spa"):
-    start_t = time.time()
+    
+    print(f"📄 Procesando PDF: {pdfPath}")
     doc_id = os.path.basename(pdfPath)
 
     # 1) Intentar texto directo (más rápido/preciso si no es escaneado)
@@ -115,7 +119,7 @@ def ocr_pdf_to_chunks(pdfPath, pdfName, lang="spa"):
         print(f"📝 Página {i}/{len(pages)} procesada, {len(all_chunks)} chunks hasta ahora.")
 
     # Guardar chunks en Azure Blob Storage
-    blobName = f"contratos/{pdfName}.jsonl"
+    blobName = f"{pdfName}.jsonl"
 
     # Crear el cliente del blob
     blob = createBlobClient(blobName, CONTAINER_CHUNKS)
@@ -125,24 +129,36 @@ def ocr_pdf_to_chunks(pdfPath, pdfName, lang="spa"):
     blob.upload_blob(jsonl_str.encode("utf-8"), overwrite=True)
 
     print(f"✅ {len(all_chunks)} chunks guardados del archivo {pdfName}")
-    print(f"⏱️ Tiempo total: {time.time() - start_t:.2f} s")
+    
 
 if __name__ == "__main__":
     # inicializar logs
     log = get_logger("chunks")
     log.info("Iniciando OCR de PDF")
+    total_time = 0
 
-    #ingresamos el nombre del pdf
-    pdf_name = input("Ingresa el nombre del PDF (sin extensión): ").strip()
-    try:
-        # Obtenemos PDF de azure blob storage
-        getPdfFromBlob(pdf_name)
+    for file_id in range(50,500):
+        start_t = time.time()
+        try:
+            #ingresamos el nombre del pdf
+            # pdf_name = input("Ingresa el nombre del PDF (sin extensión): ").strip()
+            pdf_name = db_conection(file_id)
+            pdf_name, _ = os.path.splitext(pdf_name)
 
-        if not os.path.exists(OUT_PATH):
-            raise FileNotFoundError(f"No se encontró {OUT_PATH} en el directorio actual.")
-        ocr_pdf_to_chunks(OUT_PATH, pdf_name)
-        log.info(f"PDF {pdf_name} procesado exitosamente.")
-        print(f"✅ Proceso completado para {pdf_name}.")
-    except Exception as e:
-        log.error(f"Error procesando PDF {pdf_name}: {e}")
-        print(f"❌ Ocurrió un error: {e}")
+            # Obtenemos PDF de azure blob storage
+            getPdfFromBlob(pdf_name)
+            print(f"✅ PDF {pdf_name} descargado exitosamente.")
+
+            if not os.path.exists(OUT_PATH):
+                raise FileNotFoundError(f"No se encontró {OUT_PATH} en el directorio actual.")
+            ocr_pdf_to_chunks(OUT_PATH, pdf_name)
+            log.info(f"PDF {pdf_name} con file_id {file_id} procesado exitosamente en {time.time() - start_t:.2f} s.")
+            print(f"✅ Proceso completado para {pdf_name}.")
+        except Exception as e:
+            log.error(f"Error procesando PDF {pdf_name}: {e}")
+            print(f"❌ Ocurrió un error: {e}")
+        print(f"⏱️ Tiempo total: {time.time() - start_t:.2f} s")
+        total_time += time.time() - start_t
+        print(f"⏳ Tiempo acumulado para todos los PDFs: {total_time:.2f} s")
+
+    log.info(f"Tiempo acumulado para todos los PDFs: {total_time:.2f} s")
