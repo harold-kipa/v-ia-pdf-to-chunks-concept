@@ -111,7 +111,7 @@ def ocr_pdf_to_chunks(pdfPath, pdfName, lang="spa"):
         for j, part in enumerate(chunk_text(txt)):
             all_chunks.append({
                 "id": str(uuid.uuid4()),
-                "doc_id": doc_id,
+                "doc_id": f"{pdfName}.pdf",
                 "page": i,
                 "chunk_idx": j + 1,
                 "content": part
@@ -137,7 +137,7 @@ if __name__ == "__main__":
     log.info("Iniciando OCR de PDF")
     total_time = 0
 
-    for file_id in range(50,500):
+    for file_id in range(1224,1622):
         start_t = time.time()
         try:
             #ingresamos el nombre del pdf
