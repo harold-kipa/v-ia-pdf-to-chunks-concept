@@ -10,7 +10,7 @@ from log import get_logger
 
 OUT_PATH  = "./descargas/file.pdf" # ruta local de salida
 CONTAINER_PDF = "v-ia-files"
-CONTAINER_CHUNKS = "v-ia-chunks"
+CONTAINER_CHUNKS = "v-ia-op"
 CHUNK_SIZE = 7000
 CHUNK_OVERLAP = 600
 
@@ -83,7 +83,7 @@ def extract_text_with_pdftotext(pdf_path):
     except subprocess.CalledProcessError:
         return ""
 
-def ocr_pdf_to_chunks(pdfPath, pdfName, lang="spa"):
+def ocr_pdf_to_chunks(pdfPath, pdfName, pdf_info, lang="spa"):
     
     print(f"📄 Procesando PDF: {pdfPath}")
     doc_id = os.path.basename(pdfPath)
@@ -114,7 +114,11 @@ def ocr_pdf_to_chunks(pdfPath, pdfName, lang="spa"):
                 "doc_id": f"{pdfName}.pdf",
                 "page": i,
                 "chunk_idx": j + 1,
-                "content": part
+                "content": part,
+                "number": pdf_info["number"],
+                "year": pdf_info["year"],
+                "month": pdf_info["month"],
+                "account": pdf_info["account_number_homologated"]
             })
         print(f"📝 Página {i}/{len(pages)} procesada, {len(all_chunks)} chunks hasta ahora.")
 
@@ -137,13 +141,18 @@ if __name__ == "__main__":
     log.info("Iniciando OCR de PDF")
     total_time = 0
 
-    for file_id in range(1224,1622):
+    for file_id in range(10904,21732):
         start_t = time.time()
         try:
+            print(file_id)
             #ingresamos el nombre del pdf
             # pdf_name = input("Ingresa el nombre del PDF (sin extensión): ").strip()
-            pdf_name = db_conection(file_id)
+            pdf_info = db_conection(file_id, "op")
+            pdf_name = pdf_info["pdf_name"]
             pdf_name, _ = os.path.splitext(pdf_name)
+
+            print(pdf_name)
+            # input()
 
             # Obtenemos PDF de azure blob storage
             getPdfFromBlob(pdf_name)
@@ -151,7 +160,7 @@ if __name__ == "__main__":
 
             if not os.path.exists(OUT_PATH):
                 raise FileNotFoundError(f"No se encontró {OUT_PATH} en el directorio actual.")
-            ocr_pdf_to_chunks(OUT_PATH, pdf_name)
+            ocr_pdf_to_chunks(OUT_PATH, pdf_name, pdf_info)
             log.info(f"PDF {pdf_name} con file_id {file_id} procesado exitosamente en {time.time() - start_t:.2f} s.")
             print(f"✅ Proceso completado para {pdf_name}.")
         except Exception as e:

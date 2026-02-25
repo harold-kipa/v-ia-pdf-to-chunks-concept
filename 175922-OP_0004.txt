@@ -1,0 +1,90 @@
+
+--- Página 1 ---
+Le FO-GA-PA-052 FO - FORMATO ÚNICO DE PERTINENCIA PARA TRANSACCIONES DE FIDEICOMISOS ”i
+
+FECHA: 2015 8 E No. EMPRESA
+
+TIPO DE PAGO: 1. Pago Contractual y pertinencia: N* ORDEN CLIENTE
+2. Pago Orden cliente y Pertinencia: N* ORDEN DE OPERACIÓN:
+
+3. Información Adicional:
+
+|. DISPONIBILIDAD DE RECURSOS
+
+CUENTA PAGADORA Entidad: BANCO DE OCCIDENTE No. Cuenta: 256104209 Y
+REQUIERE TRASLADO DE RECURSOS: SI: X Me]
+Cuenta de negocio Origen EEN Valor del Giro /Pago: 9,860,000.00
+
+No. Cuenta: 1001210002790- : Valor GMF: 39,440.00
+Entidad CCA Valor otros gastos: a a e
+
+NIT: TOTAL TRASLADO: 9,899,440.00
+
+Il. REGISTRO DE LAS VALIDACIONES DE PERTINENCIA DEL PAGO / GIRO
+
+Tipo de transacción requerida:
+sólo Pago: — E aña
+
+...... 0 Causación:
+
+Aspecto / Criterio verificado:
+
+1, El Giro/Pago corresponde al Si: Xx ¿ Si: 7. Firma SI: 8. Email Si:
+: F———| $5. Exento GMF: a i
+objeto del contrato: NO: NO: Xx Digital: NO: autorizado: — No:
+a
+2 Recursos suficientes para el SI: DA Si: 9. Requiere registro de
+Giro/Pago y gastos derivados 6. Exento ACH: Ds e.
+NO: NO: X Movimiento diferido:
+
+(impuestos, GMF, otros):
+
+— |
+3. Beneficiario y destinatario del Si: Número de Cuotas a diferir:
+pago; pago a tercero: sd - ; LANero e A E are O mo lo
+Lx
+
+4. Soporte para pago via correo SI:
+electronico: FAX: NO:
+En constancia de lo anterior, firman:
+| Cargo Nombre del Funcionario
+[Ejecutivo de Gestión JENNY PAOLA VASQUEZ
+|Coordinador/ Director MARTIN RICARDO DIAB
+
+lll. PAGOS CONTRACTUALES: Información del Pago y Datos del Beneficiario del Pago
+
+Tipo de pago contractual:
+
+(d) NIT / CC Beneficiario
+— DABO../. giro:
+
+(a) Nombre del Beneficiario Causación: (b) NIT / CC Beneficiario Causación: (c) Nombre der aemencay del
+VO oem ue ac meo romina nabos dee mae —[;;DL Bano
+
+(f) Forma de Pago:
+
+(h) Entidad Financiera Destino: (1) Tipo de Cuenta
+
+(k) Valor del Giro/Pag
+
+1V. CONTROL DE REGISTRO DE LA TRANSACCIÓN * exclusivo URT
+
+Fase de la transacción ra Nombre del Funcionario que realiza el registro
+
+1. Orden de Operación i !
+
+Fase de la transacción Fecha
+
+| Nombre del Funcionario que realiza el
+| registro o Aprobación
+
+4. Instrucción
+2. Preliquidación 5. Aprobación
+
+3. Causación General 6. Revisión
+
+CUENTA CONTABLE 727959503001
+FAVOR APLICAR LAS RETENCIONES QUE CORRESPONDAN
+
+FIDUCIARIA DE OCCIDENTE S.A Versión:2 Sensible 1 II CITAN DINNTIN II ll
+. OP06023
