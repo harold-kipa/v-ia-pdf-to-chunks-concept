@@ -18,7 +18,7 @@ def db_conection(file_id, typeFile):
     SCHEMA = os.getenv("SQLSERVER_SCHEMA")
     
 
-    conectionText = 'DRIVER={ODBC Driver 18 for SQL Server};'+ f'SERVER={HOST};DATABASE={DB};UID={USER};PWD={PASS};Encrypt=yes;TrustServerCertificate=yes;'
+    conectionText = 'DRIVER={ODBC Driver 17 for SQL Server};'+ f'SERVER={HOST};DATABASE={DB};UID={USER};PWD={PASS};Encrypt=yes;TrustServerCertificate=yes;'
     # conectionText = 'DRIVER={ODBC Driver 18 for SQL Server};'+ f'SERVER={HOST};DATABASE={DB};UID={USER};PWD={PASS}' // maquina virtual
 
     conn = pyodbc.connect(conectionText)

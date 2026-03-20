@@ -4,3 +4,4 @@ azure-storage-blob
 python-dotenv
 sentence-transformers>=3.0.0
 pyodbc
+PyPDF2

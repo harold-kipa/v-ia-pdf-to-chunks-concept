@@ -141,7 +141,7 @@ if __name__ == "__main__":
     log.info("Iniciando OCR de PDF")
     total_time = 0
 
-    for file_id in range(10904,21732):
+    for file_id in range(6889,21732):
         start_t = time.time()
         try:
             print(file_id)
